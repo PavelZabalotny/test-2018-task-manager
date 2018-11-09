@@ -3,7 +3,7 @@ export const generateExpiredTasks = (() => {
   let count = 0;
 
   return () => {
-    if(!count){
+    if (!count) {
       return ++count
     }
     return count *= 2
@@ -13,12 +13,12 @@ export const generateExpiredTasks = (() => {
 /* форматирование даты: 24/10/2018 */
 export const getHistoryDate = newTime => {
   const formatDate = (date, m = undefined) => {
-    const d = m ? String(date + 1) : String(date);
-    return (
-      d.length > 1 ?
-        (d) :
-        `0${d}`
-    )
+    const d = m
+      ? date + 1
+      : date;
+    return d.toString().length > 1
+      ? (d)
+      : `0${d}`
   };
   const date = new Date(newTime);
   const day = formatDate(date.getDate());
