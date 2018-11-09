@@ -55,6 +55,10 @@ class App extends Component {
           onSearchChange={this.handleSearchChange}
           onCheckedChange={this.handleCheckedChange}
           onReset={this.handleReset}
+          findTaskInput={findTaskInput}
+          inProgress={inProgress}
+          expired={expired}
+          done={done}
         />
 
         {/* Добавление задач */}
@@ -93,9 +97,7 @@ class App extends Component {
     if (arr.length > 0) {
       return items
         .filter(item => item.task.includes(input.trim()))
-        .filter(item => {
-          return arr.indexOf(item.status) >= 0;
-        })
+        .filter(item => arr.indexOf(item.status) >= 0)
     } else if (iLen) {
       return items.filter(item => item.task.includes(input.trim()))
     }

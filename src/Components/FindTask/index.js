@@ -8,7 +8,7 @@ class FindTask extends React.Component {
     onReset: PropTypes.func,
   };
 
-  constructor() {
+  /*constructor() {
     super();
     this.state = {
       validateTask: '',
@@ -20,12 +20,13 @@ class FindTask extends React.Component {
     };
 
     this.findCheckbox = React.createRef();
-  }
-
+  }*/
 
   render() {
+    const {findTaskInput, inProgress, expired, done} = this.props
+
     return (
-      <div className="mb-4" ref={this.findCheckbox}>
+      <div className="mb-4" /*ref={this.findCheckbox}*/>
 
         <div className="input-group mb-1">
 
@@ -35,7 +36,7 @@ class FindTask extends React.Component {
             placeholder="Поиск задач"
             aria-label="Поиск задач"
             aria-describedby="button-addon2"
-            value={this.state.findTaskInput}
+            value={findTaskInput}
             onChange={this.onSearchChange}
           />
 
@@ -57,7 +58,7 @@ class FindTask extends React.Component {
               type="checkbox"
               name="inProgress"
               className="form-check-input"
-              defaultChecked={this.state.inProgress}
+              defaultChecked={inProgress}
               onChange={this.toggleChange}
             />
             inProgress
@@ -70,7 +71,7 @@ class FindTask extends React.Component {
               type="checkbox"
               name="expired"
               className="form-check-input"
-              defaultChecked={this.state.expired}
+              defaultChecked={expired}
               onChange={this.toggleChange}
             />
             expired
@@ -83,7 +84,7 @@ class FindTask extends React.Component {
               type="checkbox"
               name="done"
               className="form-check-input"
-              defaultChecked={this.state.done}
+              defaultChecked={done}
               onChange={this.toggleChange}
             />
             done
@@ -103,9 +104,9 @@ class FindTask extends React.Component {
       done: '',
     };
 
-    this.findCheckbox.current.querySelectorAll('.form-check-input').forEach(item => item.checked = '');
+    //this.findCheckbox.current.querySelectorAll('.form-check-input').forEach(item => item.checked = '');
 
-    this.setState(resetFindState);
+    //this.setState(resetFindState);
 
     this.props.onReset(resetFindState)
   };
@@ -113,9 +114,9 @@ class FindTask extends React.Component {
   toggleChange = e => {
     const {name} = e.target;
 
-    this.setState({
+    /*this.setState({
       [name]: this.state[name] ? '' : name
-    });
+    });*/
 
     this.props.onCheckedChange(name)
   };
@@ -123,9 +124,9 @@ class FindTask extends React.Component {
   onSearchChange = e => {
     const {value} = e.target;
 
-    this.setState({
+    /*this.setState({
       findTaskInput: value
-    });
+    });*/
 
     this.props.onSearchChange(value);
   };
