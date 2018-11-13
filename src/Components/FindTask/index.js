@@ -1,102 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class FindTask extends React.Component {
-  static propTypes = {
-    onSearchChange: PropTypes.func,
-    onCheckedChange: PropTypes.func,
-    onReset: PropTypes.func,
-  };
-
-  /*constructor() {
-    super();
-    this.state = {
-      validateTask: '',
-      findTaskInput: '',
-      inProgress: '',
-      expired: '',
-      done: '',
-      checkedName: '',
-    };
-
-    this.findCheckbox = React.createRef();
-  }*/
-
-  render() {
-    const {findTaskInput, inProgress, expired, done} = this.props
-
-    return (
-      <div className="mb-4" /*ref={this.findCheckbox}*/>
-
-        <div className="input-group mb-1">
-
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Поиск задач"
-            aria-label="Поиск задач"
-            aria-describedby="button-addon2"
-            value={findTaskInput}
-            onChange={this.onSearchChange}
-          />
-
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={this.handleReset}
-          >
-            Reset
-          </button>
-
-        </div>
-
-        <div className="form-check-inline">
-          <span className="mr-2">
-            Поиск cо статусом:
-          </span>
-          <label className="form-check-label" htmlFor="check1">
-            <input
-              type="checkbox"
-              name="inProgress"
-              className="form-check-input"
-              defaultChecked={inProgress}
-              onChange={this.toggleChange}
-            />
-            inProgress
-          </label>
-        </div>
-
-        <div className="form-check-inline">
-          <label className="form-check-label" htmlFor="check1">
-            <input
-              type="checkbox"
-              name="expired"
-              className="form-check-input"
-              defaultChecked={expired}
-              onChange={this.toggleChange}
-            />
-            expired
-          </label>
-        </div>
-
-        <div className="form-check-inline">
-          <label className="form-check-label" htmlFor="check1">
-            <input
-              type="checkbox"
-              name="done"
-              className="form-check-input"
-              defaultChecked={done}
-              onChange={this.toggleChange}
-            />
-            done
-          </label>
-        </div>
-
-      </div>
-    );
-  }
+const FindTask = ({findTaskInput, onReset, onCheckedChange, onSearchChange, inProgress, expired, done}) => {
 
   /* Сброс фильтров поиска */
-  handleReset = () => {
+  const handleReset = () => {
     const resetFindState = {
       findTaskInput: '',
       inProgress: '',
@@ -104,32 +12,95 @@ class FindTask extends React.Component {
       done: '',
     };
 
-    //this.findCheckbox.current.querySelectorAll('.form-check-input').forEach(item => item.checked = '');
-
-    //this.setState(resetFindState);
-
-    this.props.onReset(resetFindState)
+    onReset(resetFindState)
   };
 
-  toggleChange = e => {
+  const toggleChange = e => {
     const {name} = e.target;
 
-    /*this.setState({
-      [name]: this.state[name] ? '' : name
-    });*/
-
-    this.props.onCheckedChange(name)
+    onCheckedChange(name)
   };
 
-  onSearchChange = e => {
+  const onSearchFindChange = e => {
     const {value} = e.target;
 
-    /*this.setState({
-      findTaskInput: value
-    });*/
+    onSearchChange(value);
+  }
 
-    this.props.onSearchChange(value);
-  };
+  return (
+    <div className="mb-4" /*ref={this.findCheckbox}*/>
+
+      <div className="input-group mb-1">
+
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Поиск задач"
+          aria-label="Поиск задач"
+          aria-describedby="button-addon2"
+          value={findTaskInput}
+          onChange={onSearchFindChange}
+        />
+
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+
+      </div>
+
+      <div className="form-check-inline">
+          <span className="mr-2">
+            Поиск cо статусом:
+          </span>
+        <label className="form-check-label" htmlFor="check1">
+          <input
+            type="checkbox"
+            name="inProgress"
+            className="form-check-input"
+            defaultChecked={inProgress}
+            onChange={toggleChange}
+          />
+          inProgress
+        </label>
+      </div>
+
+      <div className="form-check-inline">
+        <label className="form-check-label" htmlFor="check1">
+          <input
+            type="checkbox"
+            name="expired"
+            className="form-check-input"
+            defaultChecked={expired}
+            onChange={toggleChange}
+          />
+          expired
+        </label>
+      </div>
+
+      <div className="form-check-inline">
+        <label className="form-check-label" htmlFor="check1">
+          <input
+            type="checkbox"
+            name="done"
+            className="form-check-input"
+            defaultChecked={done}
+            onChange={toggleChange}
+          />
+          done
+        </label>
+      </div>
+
+    </div>
+  )
 }
+
+FindTask.propTypes = {
+  onSearchChange: PropTypes.func,
+  onCheckedChange: PropTypes.func,
+  onReset: PropTypes.func,
+};
 
 export default FindTask;
